@@ -32,8 +32,8 @@ p template     #=> "C*S1w5"
 
 summary = PackTemplate.summarize(template)
 puts summary #=> unsigned_char :infinite
-                 uint16_t 1
-                 ber_compressed_int 5
+             #   uint16_t 1
+             #   ber_compressed_int 5
 
 p PackTemplate.for_summary(summary) #=> "C*S1w5"
 ```

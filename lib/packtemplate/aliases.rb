@@ -1,5 +1,9 @@
 # coding: us-ascii
 
+# @todo
+# * Consider aliased name
+# * Fix indent
+
 module PackTemplate
 
   ALIASES = {
