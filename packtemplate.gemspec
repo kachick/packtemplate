@@ -1,17 +1,15 @@
 Gem::Specification.new do |gem|
   # specific
 
-  gem.description   = %q{Readable aliases for Array#pack, String#unpack}
+  gem.description   = %q{DSL to build "Pack Template Format(for Array#pack, String#unpack)"}
 
   gem.summary       = gem.description.dup
-  gem.homepage      = 'http://kachick.github.com/pack_aliases/'
+  gem.homepage      = 'http://kachick.github.com/packtemplate/'
   gem.license       = 'MIT'
-  gem.name          = 'pack_aliases'
+  gem.name          = 'packtemplate'
   gem.version       = '0.0.1.a'
 
   gem.required_ruby_version = '>= 1.9.3'
-
-  gem.add_runtime_dependency 'optionalargument', '~> 0.0.3'
 
   gem.add_development_dependency 'yard', '>= 0.8.6.1', '< 0.9'
   gem.add_development_dependency 'rspec', '>= 2.13', '< 3'

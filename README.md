@@ -1,74 +1,64 @@
-pack_aliases
+packtemplate
 ===========
 
-[![Build Status](https://secure.travis-ci.org/kachick/pack_aliases.png)](http://travis-ci.org/kachick/pack_aliases)
-[![Gem Version](https://badge.fury.io/rb/pack_aliases.png)](http://badge.fury.io/rb/pack_aliases)
+[![Build Status](https://secure.travis-ci.org/kachick/packtemplate.png)](http://travis-ci.org/kachick/packtemplate)
+[![Gem Version](https://badge.fury.io/rb/packtemplate.png)](http://badge.fury.io/rb/packtemplate)
 
 Description
 -----------
 
-A trying DbC in Ruby.
-But so hack, I use for debug :)
+DSL to build "Pack Template Format(for Array#pack, String#unpack)"
 
 Features
 --------
 
+* Builder
+* Parser
 * Pure Ruby :)
 
 Usage
 -----
 
 ```ruby
-require 'module/dbc'
+require 'packtemplate'
 
-class FooBar
-  extend Module::DbC
-
-  def initialize
-    @counter = 1
-  end
-
-  def func(arg)
-    @counter += 1
-    arg + 1
-  end
-
-  dbc :func,
-       pre: ->arg{arg > 1},
-       post: ->ret{ret >= 10},
-       invariant: ->{@counter < 3}
+template = PackTemplate.build do
+  unsigned_char :infinite
+  uint16_t
+  ber_compressed_int 5
 end
 
-FooBar.new.func 0 #=> fail pre-conditon is invalid: (args: 0) (Module::DbC::PreConditionError)
-FooBar.new.func 8 #=> fail post-conditon is invalid: (ret: 9) (Module::DbC::PostConditionError)
-FooBar.new.func 9 #=> pass
+p template     #=> "C*S1w5"
 
-foo = FooBar.new
-foo.func 11       #=> pass
-foo.func 11       #=> fail invariant-conditon is invalid (Module::DbC::PostInvariantConditionError)
+summary = PackTemplate.summarize(template)
+puts summary #=> unsigned_char :infinite
+                 uint16_t 1
+                 ber_compressed_int 5
+
+p PackTemplate.for_summary(summary) #=> "C*S1w5"
 ```
 
 Requirements
 -------------
 
-* Ruby - [1.9.2 or later](http://travis-ci.org/#!/kachick/pack_aliases)
+* Ruby - [1.9.3 or later](http://travis-ci.org/#!/kachick/packtemplate)
 
 Install
 -------
 
 ```bash
-gem install pack_aliases
+gem install packtemplate
 ```
 
 Link
 ----
 
-* [Home](http://kachick.github.com/pack_aliases/)
-* [code](https://github.com/kachick/pack_aliases)
-* [API](http://kachick.github.com/pack_aliases/yard/frames.html)
-* [issues](https://github.com/kachick/pack_aliases/issues)
-* [CI](http://travis-ci.org/#!/kachick/pack_aliases)
-* [gem](https://rubygems.org/gems/pack_aliases)
+* [Home](http://kachick.github.com/packtemplate/)
+* [code](https://github.com/kachick/packtemplate)
+* [API](http://kachick.github.com/packtemplate/yard/frames.html)
+* [issues](https://github.com/kachick/packtemplate/issues)
+* [CI](http://travis-ci.org/#!/kachick/packtemplate)
+* [gem](https://rubygems.org/gems/packtemplate)
 
 License
 --------
